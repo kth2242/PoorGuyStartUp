@@ -11,9 +11,7 @@ public class PlayerController : MonoBehaviour {
 	private SpriteRenderer characterSprite; // variable to keep character sprite renderer reference
 	private SpriteRenderer pantsSprite; // variable to keep pants sprite renderer reference
 	private SpriteRenderer shirtSprite; // variable to keep shirt sprite renderer reference
-	private Animation anim;
-	[SerializeField] private AnimationClip idleClip;
-	[SerializeField] private AnimationClip runClip;
+	private SpriteAnimator anim; // variable to keep sprite animator reference
 
 	// Use this for initialization
 	void Start () 
@@ -22,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 		characterSprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		pantsSprite = transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		shirtSprite = transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>();
-		anim = transform.GetChild(0).gameObject.GetComponent<Animation>();
+		anim = transform.GetChild(0).gameObject.GetComponent<SpriteAnimator>();
 	}
 	
 	// Update is called once per frame
@@ -99,11 +97,11 @@ public class PlayerController : MonoBehaviour {
 			transform.position = Vector3.MoveTowards (transform.position, destination, speed * Time.deltaTime);
 
 			/* play run animation */
-			anim.CrossFade (runClip.name);
+			anim.Play("RUN");
 		}
 		else
 			/* play idle animation */
-			anim.CrossFade (idleClip.name);
+			anim.Play("IDLE");
 	}
 
 	int CheckQuadrant()

@@ -1814,7 +1814,8 @@ MonoBehaviour:
   player: {fileID: 962655555}
   speed: 2
   detectRange: 4.5
-  combatRange: 1
+  combatRange: 0.49
+  wanderRange: 1.5
   maxHealth: 100
   currentHealth: 0
   damage: 10
@@ -11907,7 +11908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 398413654}
   - component: {fileID: 398413653}
-  - component: {fileID: 398413651}
+  - component: {fileID: 398413652}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -11915,24 +11916,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!111 &398413651
-Animation:
+--- !u!114 &398413652
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 398413650}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 8086d53a1af73f047a28fac447c69352, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 8086d53a1af73f047a28fac447c69352, type: 2}
-  - {fileID: 7400000, guid: 0b507f63eea2c964aad69c6e2007fd56, type: 2}
-  - {fileID: 7400000, guid: 2d9d94ebe5461304ba775358e0d93280, type: 2}
-  - {fileID: 7400000, guid: a318df0079062064698326e815e2cff4, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33b07486c596a42ab891f02f73985c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 398413653}
+  animations:
+  - name: IDLE
+    fps: 5
+    frames:
+    - {fileID: 21300000, guid: b680661f74857d44f86032875e36bcfc, type: 3}
+    - {fileID: 21300000, guid: b4405d283a64b794690501246a4e71e0, type: 3}
+    - {fileID: 21300000, guid: ff2de7d7a956c7648bf135950089022d, type: 3}
+    - {fileID: 21300000, guid: ac16860152aa499409f30cc3423318ea, type: 3}
+    - {fileID: 21300000, guid: 24479d962901822428e9c0c40f1c6084, type: 3}
+    triggers: []
+  - name: RUN
+    fps: 6
+    frames:
+    - {fileID: 21300000, guid: 2e0c969e05d5ad444aeee63cb140b9cf, type: 3}
+    - {fileID: 21300000, guid: 66d07dc3fdc069c4dba2b9423b56629e, type: 3}
+    - {fileID: 21300000, guid: 29288c0264624654bb8f7b0f47d6353f, type: 3}
+    - {fileID: 21300000, guid: 39ab047e280ab244dbd92697f0238ee4, type: 3}
+    - {fileID: 21300000, guid: 8882c556eacc1384d9c9257ade0e0262, type: 3}
+    - {fileID: 21300000, guid: 01ca917a2eb10144098accca7b03f3eb, type: 3}
+    triggers: []
+  playAnimationOnStart: IDLE
 --- !u!212 &398413653
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20939,7 +20955,6 @@ GameObject:
   m_Component:
   - component: {fileID: 720401451}
   - component: {fileID: 720401452}
-  - component: {fileID: 720401453}
   m_Layer: 0
   m_Name: BasicShirt
   m_TagString: Untagged
@@ -21004,21 +21019,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!111 &720401453
-Animation:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 720401450}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: f2e1a145230a4654e9bcb8c32f43f08f, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: f2e1a145230a4654e9bcb8c32f43f08f, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &720464672
 GameObject:
   m_ObjectHideFlags: 0
@@ -28394,9 +28394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64932087ce15ee44a4fa6b81fd4a77c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  idleClip: {fileID: 7400000, guid: 8086d53a1af73f047a28fac447c69352, type: 2}
-  runClip: {fileID: 7400000, guid: 0b507f63eea2c964aad69c6e2007fd56, type: 2}
+  speed: 3
 --- !u!4 &962655558
 Transform:
   m_ObjectHideFlags: 0
@@ -28404,7 +28402,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 962655555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.157, y: 0.483, z: -4.23}
+  m_LocalPosition: {x: -0.95, y: 0.483, z: -5.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 398413654}
@@ -34833,7 +34831,8 @@ MonoBehaviour:
   player: {fileID: 962655555}
   speed: 2
   detectRange: 4.5
-  combatRange: 1
+  combatRange: 0.49
+  wanderRange: 1.5
   maxHealth: 100
   currentHealth: 0
   damage: 10
@@ -42070,6 +42069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1393386144}
   - component: {fileID: 1393386146}
+  - component: {fileID: 1393386145}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -42092,6 +42092,39 @@ Transform:
   m_Father: {fileID: 1154519174}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
+--- !u!114 &1393386145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1393386143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33b07486c596a42ab891f02f73985c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1393386146}
+  animations:
+  - name: IDLE
+    fps: 5
+    frames:
+    - {fileID: 21300000, guid: b680661f74857d44f86032875e36bcfc, type: 3}
+    - {fileID: 21300000, guid: b4405d283a64b794690501246a4e71e0, type: 3}
+    - {fileID: 21300000, guid: ff2de7d7a956c7648bf135950089022d, type: 3}
+    - {fileID: 21300000, guid: ac16860152aa499409f30cc3423318ea, type: 3}
+    - {fileID: 21300000, guid: 24479d962901822428e9c0c40f1c6084, type: 3}
+    triggers: []
+  - name: RUN
+    fps: 6
+    frames:
+    - {fileID: 21300000, guid: 2e0c969e05d5ad444aeee63cb140b9cf, type: 3}
+    - {fileID: 21300000, guid: 66d07dc3fdc069c4dba2b9423b56629e, type: 3}
+    - {fileID: 21300000, guid: 29288c0264624654bb8f7b0f47d6353f, type: 3}
+    - {fileID: 21300000, guid: 39ab047e280ab244dbd92697f0238ee4, type: 3}
+    - {fileID: 21300000, guid: 8882c556eacc1384d9c9257ade0e0262, type: 3}
+    - {fileID: 21300000, guid: 01ca917a2eb10144098accca7b03f3eb, type: 3}
+    triggers: []
+  playAnimationOnStart: IDLE
 --- !u!212 &1393386146
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -44060,6 +44093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1438219896}
   - component: {fileID: 1438219898}
+  - component: {fileID: 1438219897}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -44082,6 +44116,39 @@ Transform:
   m_Father: {fileID: 49570357}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
+--- !u!114 &1438219897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1438219895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33b07486c596a42ab891f02f73985c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1438219898}
+  animations:
+  - name: IDLE
+    fps: 5
+    frames:
+    - {fileID: 21300000, guid: b680661f74857d44f86032875e36bcfc, type: 3}
+    - {fileID: 21300000, guid: b4405d283a64b794690501246a4e71e0, type: 3}
+    - {fileID: 21300000, guid: ff2de7d7a956c7648bf135950089022d, type: 3}
+    - {fileID: 21300000, guid: ac16860152aa499409f30cc3423318ea, type: 3}
+    - {fileID: 21300000, guid: 24479d962901822428e9c0c40f1c6084, type: 3}
+    triggers: []
+  - name: RUN
+    fps: 6
+    frames:
+    - {fileID: 21300000, guid: 2e0c969e05d5ad444aeee63cb140b9cf, type: 3}
+    - {fileID: 21300000, guid: 66d07dc3fdc069c4dba2b9423b56629e, type: 3}
+    - {fileID: 21300000, guid: 29288c0264624654bb8f7b0f47d6353f, type: 3}
+    - {fileID: 21300000, guid: 39ab047e280ab244dbd92697f0238ee4, type: 3}
+    - {fileID: 21300000, guid: 8882c556eacc1384d9c9257ade0e0262, type: 3}
+    - {fileID: 21300000, guid: 01ca917a2eb10144098accca7b03f3eb, type: 3}
+    triggers: []
+  playAnimationOnStart: IDLE
 --- !u!212 &1438219898
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -49082,6 +49149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1588108726}
   - component: {fileID: 1588108728}
+  - component: {fileID: 1588108727}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -49104,6 +49172,39 @@ Transform:
   m_Father: {fileID: 1948019418}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
+--- !u!114 &1588108727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1588108725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33b07486c596a42ab891f02f73985c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1588108728}
+  animations:
+  - name: IDLE
+    fps: 5
+    frames:
+    - {fileID: 21300000, guid: b680661f74857d44f86032875e36bcfc, type: 3}
+    - {fileID: 21300000, guid: b4405d283a64b794690501246a4e71e0, type: 3}
+    - {fileID: 21300000, guid: ff2de7d7a956c7648bf135950089022d, type: 3}
+    - {fileID: 21300000, guid: ac16860152aa499409f30cc3423318ea, type: 3}
+    - {fileID: 21300000, guid: 24479d962901822428e9c0c40f1c6084, type: 3}
+    triggers: []
+  - name: RUN
+    fps: 6
+    frames:
+    - {fileID: 21300000, guid: 2e0c969e05d5ad444aeee63cb140b9cf, type: 3}
+    - {fileID: 21300000, guid: 66d07dc3fdc069c4dba2b9423b56629e, type: 3}
+    - {fileID: 21300000, guid: 29288c0264624654bb8f7b0f47d6353f, type: 3}
+    - {fileID: 21300000, guid: 39ab047e280ab244dbd92697f0238ee4, type: 3}
+    - {fileID: 21300000, guid: 8882c556eacc1384d9c9257ade0e0262, type: 3}
+    - {fileID: 21300000, guid: 01ca917a2eb10144098accca7b03f3eb, type: 3}
+    triggers: []
+  playAnimationOnStart: IDLE
 --- !u!212 &1588108728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -61548,7 +61649,8 @@ MonoBehaviour:
   player: {fileID: 962655555}
   speed: 2
   detectRange: 4.5
-  combatRange: 1
+  combatRange: 0.49
+  wanderRange: 1.5
   maxHealth: 100
   currentHealth: 0
   damage: 10
