@@ -5,9 +5,10 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
 	[SerializeField] private GameObject player; // variable to save player(enemy's opponent) reference
+	private PlayerController playerController; // variable to save player controller reference
 	[SerializeField] private float speed = 2f; // variable to control the enemy speed
 	[SerializeField] private float detectRange = 4.5f; // variable to control the detecting player range
-	[SerializeField] private float combatRange = 0.49f; // variable to control the combat range
+	public float combatRange { get; private set; } // variable to control the combat range
 	[SerializeField] private float wanderRange = 1.5f; // variable to control the wandering range
 	[SerializeField] private int maxHealth = 100; // variable to control the maximum health value
 	[SerializeField] private int currentHealth; // variable to save current health value
@@ -23,7 +24,9 @@ public class EnemyController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		combatRange = 0.49f;
 		currentHealth = maxHealth;
+		playerController = player.GetComponent<PlayerController> ();
 		enemySprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		pantsSprite = transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		shirtSprite = transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>();
@@ -43,11 +46,13 @@ public class EnemyController : MonoBehaviour {
 	{
 		if (!IsInRange (combatRange) && IsInRange (detectRange))
 			Chase ();
-		else if(!IsInRange(combatRange))
+		else if (!IsInRange (combatRange))
 			Wander ();
+		else
+			anim.Play ("IDLE");
 	}
 
-	bool IsInRange(float range)
+	public bool IsInRange(float range)
 	{
 		if (Vector3.Distance (transform.position, player.transform.position) < range)
 			return true;
@@ -111,6 +116,20 @@ public class EnemyController : MonoBehaviour {
 			pantsSprite.flipX = true;
 			shirtSprite.flipX = true;
 		}
+	}
+
+	public void GetHit()
+	{
+		currentHealth -= playerController.damage;
+
+		if (currentHealth <= 0)
+			currentHealth = 0;
+	}
+
+	void OnMouseOver()
+	{
+		/* if mouse is over the enemy, set that enemy as target enemy */
+		playerController.enemy = this;
 	}
 
 	int CheckQuadrant(Vector3 origin, Vector3 target)

@@ -11948,6 +11948,33 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 8882c556eacc1384d9c9257ade0e0262, type: 3}
     - {fileID: 21300000, guid: 01ca917a2eb10144098accca7b03f3eb, type: 3}
     triggers: []
+  - name: ATTACK1
+    fps: 18
+    frames:
+    - {fileID: 21300000, guid: bb3d2543d1bd47549b09716ce80b2982, type: 3}
+    - {fileID: 21300000, guid: 678569721f25dd542ac211054a893c74, type: 3}
+    - {fileID: 21300000, guid: 51c816a2ddef44f41b5029c0bb8249d4, type: 3}
+    - {fileID: 21300000, guid: 5dace01aa5ec3af47b843fdf4cf0cc0f, type: 3}
+    - {fileID: 21300000, guid: a1997deca42792c4d9f8619bc136038a, type: 3}
+    - {fileID: 21300000, guid: db88a885678fd53499787f00b6660285, type: 3}
+    triggers:
+    - frame: 5
+      name: Trigger_DisableFirstAttack
+    - frame: 3
+      name: Trigger_Impact
+  - name: ATTACK2
+    fps: 15
+    frames:
+    - {fileID: 21300000, guid: ca729a00338d39f4f8e9601c80838c16, type: 3}
+    - {fileID: 21300000, guid: 5b14f1b402b18294d8dfb113a7983ec3, type: 3}
+    - {fileID: 21300000, guid: c4af30c708a0d424db18f0e15e074e37, type: 3}
+    - {fileID: 21300000, guid: 95965725e4ca2ac49b1f2662d789adf5, type: 3}
+    - {fileID: 21300000, guid: 99613bed0a0e0494a85b6df256022e0c, type: 3}
+    triggers:
+    - frame: 4
+      name: Trigger_DisableSecondAttack
+    - frame: 2
+      name: Trigger_Impact
   playAnimationOnStart: IDLE
 --- !u!212 &398413653
 SpriteRenderer:
@@ -28395,6 +28422,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  maxHealth: 100
+  currentHealth: 0
+  damage: 10
+  exp: 0
+  enemy: {fileID: 0}
 --- !u!4 &962655558
 Transform:
   m_ObjectHideFlags: 0

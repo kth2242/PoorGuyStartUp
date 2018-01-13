@@ -118,7 +118,10 @@ public class SpriteAnimator : MonoBehaviour
 
 		/* loop while animation looping signal is on
 		   and current frame is not the end frame of the animation */
-		while (loop || currentFrame < animation.frames.Length-1) // 1 빼는게 맞는지 확인이 필요 (2018.01.13 - 태훈)
+		/* animation.frames.Length -1 : decreasing by 1 code should exist because below while-loop call the NextFrame function and that function check the boundary of the frame number.
+		   In NextFrame function, if current frame is out of the boundary and animation is not looping, current frame becomes the last frame of the animation.
+		   After escaping from the NextFrame function, spriteRender would render the last frame and then possible to exit from the while-loop*/
+		while (loop || currentFrame < animation.frames.Length-1)
 		{
 			while (timer < delay)
 			{
