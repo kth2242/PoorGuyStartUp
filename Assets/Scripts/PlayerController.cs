@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 destination; // variable to save the position of the destination where character would go
 	private Vector3 cursorPosition; // variable to save the cursor position every frame
 	[SerializeField] private float speed = 5f; // variable to control the character speed
-	[SerializeField] private int maxHealth = 100; // variable to control the maximum health value
-	[SerializeField] private int currentHealth; // variable to save current health value
+	public int maxHealth { get; private set; } // variable to control the maximum health value
+	public int currentHealth { get; private set; } // variable to save current health value
 	public int damage { get; private set; } // variable to control the damage value
 	[SerializeField] private int exp; // variable to control the experience point value
 	private float characterDestinationGap = 1f; // variable to control the gap between the character position and the destination position
@@ -18,11 +18,12 @@ public class PlayerController : MonoBehaviour {
 	private SpriteAnimator anim; // variable to keep sprite animator reference
 	private bool isFirstAttackPlaying = false; // variable to check if the first attack animation is playing
 	private bool isSecondAttackPlaying = false; // variable to check if the second attack animation is playing
-	public EnemyController enemy;
+	public EnemyController enemy; // variable to keep enemy controller reference
 
 	// Use this for initialization
 	void Start () 
 	{
+		maxHealth = 100;
 		damage = 10;
 		currentHealth = maxHealth;
 		destination = transform.position;
@@ -38,8 +39,14 @@ public class PlayerController : MonoBehaviour {
 		/* update the mouse cursor position for every frame */
 		CursorPositionUpdate ();
 
-		/* update the character */
-		CharacterUpdate ();
+		/* if player is not dead */
+		if (!IsDead ()) 
+		{
+			/* update the character */
+			CharacterUpdate ();
+		}
+		else
+			Die ();
 	}
 
 	void CursorPositionUpdate()
@@ -170,6 +177,29 @@ public class PlayerController : MonoBehaviour {
 			anim.Play ("ATTACK2", false);
 	}
 
+	void Die()
+	{
+		/* play die animation */
+		//anim.Play ("DIE", false);
+	}
+
+	public void GetHit(int hitDamage)
+	{
+		/* decrease player's health by enemy's damage */
+		currentHealth -= hitDamage;
+
+		if (currentHealth <= 0)
+			currentHealth = 0;
+	}
+
+	public bool IsDead()
+	{
+		if (currentHealth <= 0)
+			return true;
+		else
+			return false;
+	}
+
 	/* function to be called by sprite animator trigger */
 	public void Trigger_DisableFirstAttack()
 	{
@@ -190,7 +220,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			/* if enemey is in combat range */
 			if (enemy.IsInRange (enemy.combatRange))
-				enemy.GetHit ();
+				enemy.GetHit (damage);
 		}
 	}
 

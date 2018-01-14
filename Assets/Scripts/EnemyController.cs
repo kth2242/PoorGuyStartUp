@@ -10,8 +10,8 @@ public class EnemyController : MonoBehaviour {
 	[SerializeField] private float detectRange = 4.5f; // variable to control the detecting player range
 	public float combatRange { get; private set; } // variable to control the combat range
 	[SerializeField] private float wanderRange = 1.5f; // variable to control the wandering range
-	[SerializeField] private int maxHealth = 100; // variable to control the maximum health value
-	[SerializeField] private int currentHealth; // variable to save current health value
+	public int maxHealth { get; private set; } // variable to control the maximum health value
+	public int currentHealth { get; private set; } // variable to save current health value
 	[SerializeField] private int damage = 10; // variable to control the damage value
 	[SerializeField] private int exp = 50; // variable to control the experience point value
 	private SpriteRenderer enemySprite; // variable to keep enemy sprite renderer reference
@@ -20,10 +20,12 @@ public class EnemyController : MonoBehaviour {
 	private Vector3 destination; // variable to keep the destination to wander or patrol
 	private Vector3 oldPosition; // variable to keep the initial position
 	private SpriteAnimator anim; // variable to keep sprite animator reference
+	private bool isAttackPlaying = false; // variable to check if the attack animation is playing
 
 	// Use this for initialization
 	void Start () 
 	{
+		maxHealth = 100;
 		combatRange = 0.49f;
 		currentHealth = maxHealth;
 		playerController = player.GetComponent<PlayerController> ();
@@ -44,12 +46,19 @@ public class EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (!IsInRange (combatRange) && IsInRange (detectRange))
-			Chase ();
-		else if (!IsInRange (combatRange))
-			Wander ();
+		if(!IsDead())
+		{
+			if (!IsInRange (combatRange) && IsInRange (detectRange))
+				Chase ();
+			else if (!IsInRange (combatRange))
+				Wander ();
+			else if (!playerController.IsDead ())
+				Attack ();
+			else
+				anim.Play ("IDLE");
+		}
 		else
-			anim.Play ("IDLE");
+			Die ();
 	}
 
 	public bool IsInRange(float range)
@@ -62,11 +71,15 @@ public class EnemyController : MonoBehaviour {
 
 	void Chase()
 	{
-		/* move the enemey to the player position */
-		transform.position = Vector3.MoveTowards (transform.position, player.transform.position, speed * Time.deltaTime);
+		/* if attack animation is playing, don't move the enemy */
+		if (!isAttackPlaying)
+		{
+			/* move the enemey to the player position */
+			transform.position = Vector3.MoveTowards (transform.position, player.transform.position, speed * Time.deltaTime);
 
-		/* play run animation */
-		anim.Play ("RUN");
+			/* play run animation */
+			anim.Play ("RUN");
+		}
 
 		/* if enemy position is right side of the character */
 		if (CheckQuadrant(player.transform.position, transform.position) == 1 || CheckQuadrant(player.transform.position, transform.position) == 4) 
@@ -118,12 +131,58 @@ public class EnemyController : MonoBehaviour {
 		}
 	}
 
-	public void GetHit()
+	void Attack()
 	{
-		currentHealth -= playerController.damage;
+		/* if player is in combat range, turn on the attack signal */
+		if (IsInRange (combatRange))
+			isAttackPlaying = true;
+
+		/* if attack signal is on, play attack animation */
+		if(isAttackPlaying)
+			anim.Play ("ATTACK", false);
+	}
+
+	void Die()
+	{
+		/* play die animation */
+		//anim.Play ("DIE", false);
+	}
+
+	public void GetHit(int hitDamage)
+	{
+		/* decrease enemy health by player's damage */
+		currentHealth -= hitDamage;
 
 		if (currentHealth <= 0)
 			currentHealth = 0;
+	}
+
+	bool IsDead()
+	{
+		if (currentHealth <= 0)
+			return true;
+		else
+			return false;
+	}
+
+	/* function to be called by sprite animator trigger */
+	public void Trigger_DisableAttack()
+	{
+		isAttackPlaying = false;
+	}
+
+	/* function to be called by sprite animator trigger */
+	public void Trigger_Impact()
+	{
+		/* if player is in combat range */
+		if (IsInRange (combatRange))
+			playerController.GetHit (damage);
+	}
+
+	/* function to be called by sprite animator trigger */
+	public void Trigger_Die()
+	{
+		Destroy (gameObject);
 	}
 
 	void OnMouseOver()
