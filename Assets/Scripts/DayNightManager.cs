@@ -14,7 +14,7 @@ public class DayNightManager : MonoBehaviour
     private float plIntensityLvl = 0;
 
     WaitForSeconds longTerm = new WaitForSeconds(DAYDURATION);
-    WaitForSeconds shortTerm = new WaitForSeconds(DAYDURATION);
+    WaitForSeconds shortTerm = new WaitForSeconds(1/DAYDURATION);
 
 	// Use this for initialization
 	void Start ()
