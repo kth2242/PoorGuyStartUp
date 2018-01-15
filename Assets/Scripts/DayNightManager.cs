@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class DayNightManager : MonoBehaviour
 {
-    private const float DAYDURATION = 5f;
+    //Change it to control the duration of the day 
+    private const float DAYDURATION = 10f;
 
     [SerializeField]
     private Light Sun;
     private float sunIntensityLvl = 1;
+
     [SerializeField]
     private Light pointLight;
     private float plIntensityLvl = 0;
 
+    //Long term is for Day&Night, and lighting changes per short term
     WaitForSeconds longTerm = new WaitForSeconds(DAYDURATION);
-    WaitForSeconds shortTerm = new WaitForSeconds(DAYDURATION);
+    WaitForSeconds shortTerm = new WaitForSeconds(1f/DAYDURATION);
 
 	// Use this for initialization
 	void Start ()
     {
+        //Starting from day to night
         StartCoroutine(startNightCycle());
 	}
 	
@@ -29,6 +33,7 @@ public class DayNightManager : MonoBehaviour
         pointLight.intensity = plIntensityLvl;
     }
 
+    //Cycle that starts from day to night
     IEnumerator startNightCycle()
     {
         yield return longTerm;
@@ -40,7 +45,8 @@ public class DayNightManager : MonoBehaviour
         }
         yield return StartCoroutine(startDayCycle());
     }
- 
+
+    //Cycle that starts from night to day
     IEnumerator startDayCycle()
     {
         yield return longTerm;
