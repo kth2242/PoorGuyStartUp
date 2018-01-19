@@ -13,12 +13,11 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private int exp; // variable to control the experience point value
 	private float characterDestinationGap = 1f; // variable to control the gap between the character position and the destination position
 	private SpriteRenderer characterSprite; // variable to keep character sprite renderer reference
-	private SpriteRenderer pantsSprite; // variable to keep pants sprite renderer reference
-	private SpriteRenderer shirtSprite; // variable to keep shirt sprite renderer reference
 	private SpriteAnimator anim; // variable to keep sprite animator reference
 	private bool isFirstAttackPlaying = false; // variable to check if the first attack animation is playing
 	private bool isSecondAttackPlaying = false; // variable to check if the second attack animation is playing
 	public EnemyController enemy; // variable to keep enemy controller reference
+	private InventoryManager inventory; // variable to keep InventoryManager reference
 
 	// Use this for initialization
 	void Start () 
@@ -28,9 +27,14 @@ public class PlayerController : MonoBehaviour {
 		currentHealth = maxHealth;
 		destination = transform.position;
 		characterSprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-		pantsSprite = transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-		shirtSprite = transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>();
 		anim = transform.GetChild(0).gameObject.GetComponent<SpriteAnimator>();
+
+		inventory = InventoryManager.instance;
+
+		inventory.Add (ObjectPool.instance.GetObject (1, 0).GetComponent<Equipment> ());
+		inventory.Add (ObjectPool.instance.GetObject (2, 0).GetComponent<Equipment> ());
+		inventory.Add (ObjectPool.instance.GetObject (6, 0).GetComponent<Equipment> ());
+		inventory.Add (ObjectPool.instance.GetObject (7, 0).GetComponent<Equipment> ());
 	}
 	
 	// Update is called once per frame
@@ -62,8 +66,15 @@ public class PlayerController : MonoBehaviour {
 
 	void CharacterUpdate()
 	{
-		/* update the destination position of the character given by mouse clicking */
-		DestinationUpdate ();
+		/* if the mouse is not over the UI */
+		if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject ()) 
+		{
+			/* update the destination position of the character given by mouse clicking */
+			DestinationUpdate ();
+
+			/* update the attack logic */
+			AttackUpdate ();
+		}
 
 		/* if attack animation is not playing */
 		if (!isFirstAttackPlaying && !isSecondAttackPlaying)
@@ -71,9 +82,6 @@ public class PlayerController : MonoBehaviour {
 			/* update the character position */
 			MovementUpdate ();
 		}
-
-		/* update the attack logic */
-		AttackUpdate ();
 	}
 
 	void DestinationUpdate()
@@ -109,15 +117,13 @@ public class PlayerController : MonoBehaviour {
 			if (CheckQuadrant(transform.position, cursorPosition) == 1 || CheckQuadrant(transform.position, cursorPosition) == 4) 
 			{
 				characterSprite.flipX = false;
-				pantsSprite.flipX = false;
-				shirtSprite.flipX = false;
+				inventory.AllFlipX (false);
 			}
 			/* if mouse position is left side of the character */
 			else if (CheckQuadrant(transform.position, cursorPosition) == 2 || CheckQuadrant(transform.position, cursorPosition) == 3) 
 			{
 				characterSprite.flipX = true;
-				pantsSprite.flipX = true;
-				shirtSprite.flipX = true;
+				inventory.AllFlipX (true);
 			}
 
 			/* move character position */
@@ -157,15 +163,13 @@ public class PlayerController : MonoBehaviour {
 				if (CheckQuadrant(transform.position, enemy.transform.position) == 1 || CheckQuadrant(transform.position, enemy.transform.position) == 4) 
 				{
 					characterSprite.flipX = false;
-					pantsSprite.flipX = false;
-					shirtSprite.flipX = false;
+					inventory.AllFlipX (false);
 				}
 				/* if enemy position is left side of the character */
 				else if (CheckQuadrant(transform.position, enemy.transform.position) == 2 || CheckQuadrant(transform.position, enemy.transform.position) == 3) 
 				{
 					characterSprite.flipX = true;
-					pantsSprite.flipX = true;
-					shirtSprite.flipX = true;
+					inventory.AllFlipX (true);
 				}
 			}
 		}
