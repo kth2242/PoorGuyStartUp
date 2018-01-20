@@ -25,14 +25,11 @@ public class InventoryManager : MonoBehaviour {
 	public OnItemChanged onItemChangedCallback;
 
 	private int space = 20; // variable to keep the number of the inventory slot, should be same value as transform.GetChild (0).GetChild (0).GetComponentsInChildren<InventorySlot> ();
-	public List<Item> items { get; private set; } // variable to store items which inventory would contain
-	private List<SpriteRenderer> itemsSprites; // variable to keep the sprite renderer reference to flip the sprite in real time
+	public List<Item> items = new List<Item>(); // variable to store items which inventory would contain
+	private List<SpriteRenderer> itemsSprites = new List<SpriteRenderer> (); // variable to keep the sprite renderer reference to flip the sprite in real time
 
 	void Start ()
 	{
-		items = new List<Item>();
-		itemsSprites = new List<SpriteRenderer> ();
-
 		for (int i = 0; i < items.Count; ++i) 
 		{
 			itemsSprites.Add(items [i].transform.GetComponent<SpriteRenderer> ());

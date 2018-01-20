@@ -17,6 +17,7 @@ public class ObjectPool : MonoBehaviour {
 			return;
 		}
 		instance = this;
+		Make ();
 	}
 
 	#endregion
@@ -29,7 +30,7 @@ public class ObjectPool : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		Make ();
+		//Make (); // in Awake() function
 		//DeActivateAll ();
 	}
 	
