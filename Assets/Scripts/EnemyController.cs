@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour {
 	private Vector3 destination; // variable to keep the destination to wander or patrol
 	private Vector3 oldPosition; // variable to keep the initial position
 	private SpriteAnimator anim; // variable to keep sprite animator reference
+	private SpriteAnimator pantsAnim;
+	private SpriteAnimator shirtsAnim;
     private bool isAttackPlaying = false; // variable to check if the attack animation is playing
 
 	// Use this for initialization
@@ -33,6 +35,8 @@ public class EnemyController : MonoBehaviour {
 		pantsSprite = transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		shirtSprite = transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>();
 		anim = transform.GetChild(0).gameObject.GetComponent<SpriteAnimator>();
+		pantsAnim = transform.GetChild (0).GetChild (0).GetComponent<SpriteAnimator> ();
+		shirtsAnim = transform.GetChild (0).GetChild (1).GetComponent<SpriteAnimator> ();
 
         /* set destination position around the enemy position, the destination is within wanderRange radius of the enemy */
         destination = new Vector3(Random.Range(transform.position.x - wanderRange, transform.position.x + wanderRange),
@@ -57,6 +61,8 @@ public class EnemyController : MonoBehaviour {
             else
             {
                 anim.Play("IDLE");
+				pantsAnim.Play ("IDLE");
+				shirtsAnim.Play ("IDLE");
             }
         }
 		else
@@ -81,6 +87,8 @@ public class EnemyController : MonoBehaviour {
 
 			/* play run animation */
 			anim.Play ("RUN");
+			pantsAnim.Play ("RUN");
+			shirtsAnim.Play ("RUN");
         }
 
 		/* if enemy position is right side of the character */
@@ -115,6 +123,8 @@ public class EnemyController : MonoBehaviour {
 
 		/* play run animation */
 		anim.Play ("RUN");
+		pantsAnim.Play ("RUN");
+		shirtsAnim.Play ("RUN");
 
         /* if destination position is right side of the enemy */
         if (CheckQuadrant(transform.position, destination) == 1 || CheckQuadrant(transform.position, destination) == 4) 
@@ -143,6 +153,8 @@ public class EnemyController : MonoBehaviour {
         if (isAttackPlaying)
         {
             anim.Play("ATTACK", false);
+			pantsAnim.Play ("ATTACK", false);
+			shirtsAnim.Play ("ATTACK", false);
         }
 
 	}

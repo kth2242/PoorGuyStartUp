@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4823119004230176}
   - component: {fileID: 212623830511192270}
+  - component: {fileID: 114035896072654982}
   m_Layer: 0
   m_Name: BasicPants
   m_TagString: Untagged
@@ -269,6 +270,45 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &114035896072654982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1142147635858736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33b07486c596a42ab891f02f73985c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 212623830511192270}
+  animations:
+  - name: IDLE
+    fps: 1
+    frames:
+    - {fileID: 21300000, guid: 71fd04d7740350c4ba633d8a8027b7cc, type: 3}
+    triggers: []
+  - name: RUN
+    fps: 6
+    frames:
+    - {fileID: 21300000, guid: 25285c2c2114e834eb169f7e1f25daf9, type: 3}
+    - {fileID: 21300000, guid: 50f5f4e2dc46b0a44a96e2149e1cf844, type: 3}
+    - {fileID: 21300000, guid: 9bc2f5d6703c97446a1b3788241c6306, type: 3}
+    - {fileID: 21300000, guid: 065de97bed41a8f43955121122655531, type: 3}
+    - {fileID: 21300000, guid: d92f9d0541264c245833ad5f55540242, type: 3}
+    - {fileID: 21300000, guid: 9f5c2f374bb0f2b47a63e877255e5ee7, type: 3}
+    triggers: []
+  - name: ATTACK
+    fps: 12
+    frames:
+    - {fileID: 21300000, guid: 747c22e08e2928447bfc2e131b957975, type: 3}
+    - {fileID: 21300000, guid: 858f33c3ffbeffa4597f27062c4f7efe, type: 3}
+    - {fileID: 21300000, guid: bb82184582947804d9ccb91a296e9ba6, type: 3}
+    - {fileID: 21300000, guid: e0ab4fcc98092c741b04c733255acc38, type: 3}
+    - {fileID: 21300000, guid: 8bd04d6005eefb243b7e7c4babc50227, type: 3}
+    - {fileID: 21300000, guid: 94a84b3005767304aa79d24cf4d27ec2, type: 3}
+    triggers: []
+  playAnimationOnStart: IDLE
 --- !u!114 &114182354033766446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -354,6 +394,26 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 6be25b9f2a9ac9c47ba378ab16043fbc, type: 3}
     - {fileID: 21300000, guid: bde87b78091f649489dafd8488c9bfbf, type: 3}
     - {fileID: 21300000, guid: e0e8f993f35f1c04a93cb39352474b56, type: 3}
+    triggers: []
+  - name: RUN
+    fps: 6
+    frames:
+    - {fileID: 21300000, guid: 7afd2452768384546ad01b444301c25f, type: 3}
+    - {fileID: 21300000, guid: c5f212267f3f6c64fb2a63630f7ad635, type: 3}
+    - {fileID: 21300000, guid: da518615adba32442b57ddc8b5bcf15c, type: 3}
+    - {fileID: 21300000, guid: 764eb91f73aea864ea840506c9cd738a, type: 3}
+    - {fileID: 21300000, guid: a0f7e536e744019448e60e47badfb6f5, type: 3}
+    - {fileID: 21300000, guid: 4f01915a243c27143bc9a98b69cf5607, type: 3}
+    triggers: []
+  - name: ATTACK
+    fps: 12
+    frames:
+    - {fileID: 21300000, guid: b5f6521279a243c4384f4bc11c56aec5, type: 3}
+    - {fileID: 21300000, guid: 137c01614411077408cc17255e792ad0, type: 3}
+    - {fileID: 21300000, guid: 1d9170f5ef85af248a92293193bc2edd, type: 3}
+    - {fileID: 21300000, guid: a99c5e8038ad291478f6106029bd2f84, type: 3}
+    - {fileID: 21300000, guid: 1957b02076610294b95a5ca68d0e8608, type: 3}
+    - {fileID: 21300000, guid: e27f2bf087c6e9f499bcbe7d029dc365, type: 3}
     triggers: []
   playAnimationOnStart: IDLE
 --- !u!114 &114842544019827444

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4114638355048444}
   - component: {fileID: 212608831918075158}
   - component: {fileID: 114540089219105674}
+  - component: {fileID: 114023612342431074}
   m_Layer: 0
   m_Name: BasicArmorLeg_brown
   m_TagString: Untagged
@@ -41,6 +42,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114023612342431074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1565002363003070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef33b07486c596a42ab891f02f73985c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 212608831918075158}
+  animations:
+  - name: IDLE
+    fps: 1
+    frames:
+    - {fileID: 21300000, guid: 71fd04d7740350c4ba633d8a8027b7cc, type: 3}
+    triggers: []
+  - name: RUN
+    fps: 6
+    frames:
+    - {fileID: 21300000, guid: 25285c2c2114e834eb169f7e1f25daf9, type: 3}
+    - {fileID: 21300000, guid: 50f5f4e2dc46b0a44a96e2149e1cf844, type: 3}
+    - {fileID: 21300000, guid: 9bc2f5d6703c97446a1b3788241c6306, type: 3}
+    - {fileID: 21300000, guid: 065de97bed41a8f43955121122655531, type: 3}
+    - {fileID: 21300000, guid: d92f9d0541264c245833ad5f55540242, type: 3}
+    - {fileID: 21300000, guid: 9f5c2f374bb0f2b47a63e877255e5ee7, type: 3}
+    triggers: []
+  - name: ATTACK1
+    fps: 18
+    frames:
+    - {fileID: 21300000, guid: 747c22e08e2928447bfc2e131b957975, type: 3}
+    - {fileID: 21300000, guid: 858f33c3ffbeffa4597f27062c4f7efe, type: 3}
+    - {fileID: 21300000, guid: bb82184582947804d9ccb91a296e9ba6, type: 3}
+    - {fileID: 21300000, guid: e0ab4fcc98092c741b04c733255acc38, type: 3}
+    - {fileID: 21300000, guid: 8bd04d6005eefb243b7e7c4babc50227, type: 3}
+    - {fileID: 21300000, guid: 94a84b3005767304aa79d24cf4d27ec2, type: 3}
+    triggers: []
+  - name: ATTACK2
+    fps: 15
+    frames:
+    - {fileID: 21300000, guid: 53d01a8c1e96be942a9b7e5e646dbe7b, type: 3}
+    - {fileID: 21300000, guid: 0cf45279612e86f408cd5d8b7790613f, type: 3}
+    - {fileID: 21300000, guid: e94478d7819089445991770d48ddc0b8, type: 3}
+    - {fileID: 21300000, guid: 396c754f02a95b94e9a8dd640628a682, type: 3}
+    - {fileID: 21300000, guid: 00671cb35605ccf4e8a14477f20cb2eb, type: 3}
+    triggers: []
+  playAnimationOnStart: IDLE
 --- !u!114 &114540089219105674
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -53,7 +53,7 @@ public class InventoryManager : MonoBehaviour {
 		/* keep the sprite renderer reference */
 		itemsSprites.Add(item.transform.GetComponent<SpriteRenderer> ());
 
-		/* if delegate function exists (InventorySlot::UpdateUI()) */
+		/* if delegate function exists (InventoryUI::UpdateUI()) */
 		if(onItemChangedCallback != null)
 			onItemChangedCallback.Invoke ();
 	}
@@ -63,7 +63,7 @@ public class InventoryManager : MonoBehaviour {
 		/* delete the item in the list */
 		items.Remove (item);
 
-		/* if delegate function exists (InventorySlot::UpdateUI()) */
+		/* if delegate function exists (InventoryUI::UpdateUI()) */
 		if(onItemChangedCallback != null)
 			onItemChangedCallback.Invoke ();
 	}

@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private int exp; // variable to control the experience point value
 	private float characterDestinationGap = 1f; // variable to control the gap between the character position and the destination position
 	private SpriteRenderer characterSprite; // variable to keep character sprite renderer reference
-	private SpriteAnimator anim; // variable to keep sprite animator reference
+	private SpriteAnimator anim; // variable to keep character sprite animator reference
+	private SpriteAnimator[] equipmentAnim; // variable to keep equipment sprite animator reference
 	private bool isFirstAttackPlaying = false; // variable to check if the first attack animation is playing
 	private bool isSecondAttackPlaying = false; // variable to check if the second attack animation is playing
 	public EnemyController enemy; // variable to keep enemy controller reference
@@ -28,13 +29,20 @@ public class PlayerController : MonoBehaviour {
 		destination = transform.position;
 		characterSprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		anim = transform.GetChild(0).gameObject.GetComponent<SpriteAnimator>();
+		equipmentAnim = transform.GetChild (0).GetComponentsInChildren<SpriteAnimator> ();
+		Equipment.UpdateEquipmentAnimReferenceCallback += UpdateAnimReference;
 
 		inventory = InventoryManager.instance;
 
+		/* temporary code */
 		inventory.Add (ObjectPool.instance.GetObject (1, 0).GetComponent<Equipment> ());
 		inventory.Add (ObjectPool.instance.GetObject (2, 0).GetComponent<Equipment> ());
 		inventory.Add (ObjectPool.instance.GetObject (6, 0).GetComponent<Equipment> ());
 		inventory.Add (ObjectPool.instance.GetObject (7, 0).GetComponent<Equipment> ());
+
+		inventory.items [0].Use (); // shirts equip
+		inventory.items [0].Use (); // pants equip
+		/* temporary code */
 	}
 	
 	// Update is called once per frame
@@ -131,11 +139,19 @@ public class PlayerController : MonoBehaviour {
 
 			/* play run animation */
 			anim.Play("RUN");
+
+			/* play run animation for all equipment character equipped */
+			for(int i = 0; i < equipmentAnim.Length; ++i)
+				equipmentAnim [i].Play ("RUN");
 		}
 		else
 		{
 			/* play idle animation */
 			anim.Play ("IDLE");
+
+			/* play idle animation for all equipment character equipped */
+			for(int i = 0; i < equipmentAnim.Length; ++i)
+				equipmentAnim [i].Play ("IDLE");
 		}
 	}
 
@@ -174,17 +190,36 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		/* if first attack is on, play first attack animation. if second attack is on, play second attack animation */
-		if(isFirstAttackPlaying)
+		/* if first attack is on */ 
+		if (isFirstAttackPlaying) 
+		{
+			/* play first attack animation */
 			anim.Play ("ATTACK1", false);
+
+			/* play first attack animation for all equipment character equipped */
+			for(int i = 0; i < equipmentAnim.Length; ++i)
+				equipmentAnim [i].Play ("ATTACK1", false);
+		}
+		/* if second attack is on */
 		else if(isSecondAttackPlaying)
+		{
+			/* play second attack animation */
 			anim.Play ("ATTACK2", false);
+
+			/* play first attack animation for all equipment character equipped */
+			for(int i = 0; i < equipmentAnim.Length; ++i)
+				equipmentAnim [i].Play ("ATTACK2", false);
+		}
 	}
 
 	void Die()
 	{
 		/* play die animation */
 		//anim.Play ("DIE", false);
+
+		/* play first attack animation for all equipment character equipped */
+		//for(int i = 0; i < equipmentAnim.Length; ++i)
+		//	equipmentAnim [i].Play ("DIE", false);
 	}
 
 	public void GetHit(int hitDamage)
@@ -202,6 +237,12 @@ public class PlayerController : MonoBehaviour {
 			return true;
 		else
 			return false;
+	}
+
+	/* function to be called by Equipment::Use() */
+	void UpdateAnimReference()
+	{
+		equipmentAnim = transform.GetChild (0).GetComponentsInChildren<SpriteAnimator> ();
 	}
 
 	/* function to be called by sprite animator trigger */
