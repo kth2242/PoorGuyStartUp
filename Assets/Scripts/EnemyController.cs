@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour {
 	private Vector3 destination; // variable to keep the destination to wander or patrol
 	private Vector3 oldPosition; // variable to keep the initial position
 	private SpriteAnimator anim; // variable to keep sprite animator reference
-	private bool isAttackPlaying = false; // variable to check if the attack animation is playing
+    private bool isAttackPlaying = false; // variable to check if the attack animation is playing
 
 	// Use this for initialization
 	void Start () 
@@ -34,8 +34,8 @@ public class EnemyController : MonoBehaviour {
 		shirtSprite = transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>();
 		anim = transform.GetChild(0).gameObject.GetComponent<SpriteAnimator>();
 
-		/* set destination position around the enemy position, the destination is within wanderRange radius of the enemy */
-		destination = new Vector3(Random.Range(transform.position.x - wanderRange, transform.position.x + wanderRange),
+        /* set destination position around the enemy position, the destination is within wanderRange radius of the enemy */
+        destination = new Vector3(Random.Range(transform.position.x - wanderRange, transform.position.x + wanderRange),
 								  transform.position.y,
 								  Random.Range(transform.position.z - wanderRange, transform.position.z + wanderRange));
 
@@ -48,15 +48,17 @@ public class EnemyController : MonoBehaviour {
 	{
 		if(!IsDead())
 		{
-			if (!IsInRange (combatRange) && IsInRange (detectRange))
-				Chase ();
-			else if (!IsInRange (combatRange))
-				Wander ();
-			else if (!playerController.IsDead ())
-				Attack ();
-			else
-				anim.Play ("IDLE");
-		}
+            if (!IsInRange(combatRange) && IsInRange(detectRange))
+                Chase();
+            else if (!IsInRange(combatRange))
+                Wander();
+            else if (!playerController.IsDead())
+                Attack();
+            else
+            {
+                anim.Play("IDLE");
+            }
+        }
 		else
 			Die ();
 	}
@@ -79,7 +81,7 @@ public class EnemyController : MonoBehaviour {
 
 			/* play run animation */
 			anim.Play ("RUN");
-		}
+        }
 
 		/* if enemy position is right side of the character */
 		if (CheckQuadrant(player.transform.position, transform.position) == 1 || CheckQuadrant(player.transform.position, transform.position) == 4) 
@@ -114,8 +116,8 @@ public class EnemyController : MonoBehaviour {
 		/* play run animation */
 		anim.Play ("RUN");
 
-		/* if destination position is right side of the enemy */
-		if (CheckQuadrant(transform.position, destination) == 1 || CheckQuadrant(transform.position, destination) == 4) 
+        /* if destination position is right side of the enemy */
+        if (CheckQuadrant(transform.position, destination) == 1 || CheckQuadrant(transform.position, destination) == 4) 
 		{
 			enemySprite.flipX = false;
 			pantsSprite.flipX = false;
@@ -137,9 +139,12 @@ public class EnemyController : MonoBehaviour {
 		if (IsInRange (combatRange))
 			isAttackPlaying = true;
 
-		/* if attack signal is on, play attack animation */
-		if(isAttackPlaying)
-			anim.Play ("ATTACK", false);
+        /* if attack signal is on, play attack animation */
+        if (isAttackPlaying)
+        {
+            anim.Play("ATTACK", false);
+        }
+
 	}
 
 	void Die()
