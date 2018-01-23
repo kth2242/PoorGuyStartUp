@@ -5,7 +5,7 @@ using UnityEngine;
 public class DayNightManager : MonoBehaviour
 {
     //Change it to control the duration of the day 
-    private const float DAYDURATION = 1f;
+    private const float DAYDURATION = 10f;
     private const float PI = 3.14159f;
 
     [SerializeField]
