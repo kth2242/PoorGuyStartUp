@@ -5,8 +5,7 @@ using UnityEngine;
 public class DayNightManager : MonoBehaviour
 {
     //Change it to control the duration of the day 
-    private const float DAYDURATION = 10f;
-    private const float PI = 3.14159f;
+    private const float DAYDURATION = 1f;
 
     [SerializeField]
     private Light Sun;
@@ -19,16 +18,19 @@ public class DayNightManager : MonoBehaviour
     [SerializeField]
     private GameObject timeImage;
 
-    //Long term is for Day&Night, and lighting changes per short term
+    //Long term is for Day&Night and lighting changes
     WaitForSeconds longTerm = new WaitForSeconds(DAYDURATION);
-    WaitForSeconds shortTerm = new WaitForSeconds(1f/DAYDURATION);
+
+    //Total duration of a day
+    private const float dayImgCycle = (DAYDURATION * (DAYDURATION + 1f)) * 2f;
+    private const float DEGREES_PER_SECOND = 360 / dayImgCycle;
 
     // Use this for initialization
     void Start ()
     {
+        Time.timeScale = 1f;
         //Starting from day to night
         StartCoroutine(startNightCycle());
-        StartCoroutine(startTimeCycle());
     }
 	
 	// Update is called once per frame
@@ -36,14 +38,15 @@ public class DayNightManager : MonoBehaviour
     {
         Sun.intensity = sunIntensityLvl;
         pointLight.intensity = plIntensityLvl;
-        timeImage.transform.Rotate(0, 0, (2*PI*100) / (2*(DAYDURATION * (DAYDURATION + 1f))) * Time.deltaTime);
+        //timeImage.transform.Rotate(0, 0, degreeRotation * Time.deltaTime);
+        timeImage.transform.localRotation = Quaternion.Euler(0, 0, Time.fixedTime * DEGREES_PER_SECOND);
     }
 
     //Cycle that starts from day to night
     IEnumerator startNightCycle()
     {
         yield return longTerm;
-        while (sunIntensityLvl > 0f && plIntensityLvl < 1f)
+        while (sunIntensityLvl >= (1f/DAYDURATION))
         {
             yield return longTerm;
             sunIntensityLvl -= (1f / DAYDURATION);
@@ -56,7 +59,7 @@ public class DayNightManager : MonoBehaviour
     IEnumerator startDayCycle()
     {
         yield return longTerm;
-        while (sunIntensityLvl < 1f && plIntensityLvl > 0f)
+        while (plIntensityLvl >= (1f / DAYDURATION))
         {
             yield return longTerm;
             sunIntensityLvl += (1f / DAYDURATION);
@@ -65,12 +68,4 @@ public class DayNightManager : MonoBehaviour
         yield return StartCoroutine(startNightCycle());
     }
 
-    IEnumerator startTimeCycle()
-    {
-
-        yield return shortTerm;
-        //timeImage.transform.Rotate(0, 0, PI*(DAYDURATION+(1f/DAYDURATION)) * Time.deltaTime);
-
-        yield return StartCoroutine(startTimeCycle());
-    }
 }
