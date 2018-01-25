@@ -56,9 +56,14 @@ MonoBehaviour:
   spriteRenderer: {fileID: 212608831918075158}
   animations:
   - name: IDLE
-    fps: 1
+    fps: 5
     frames:
     - {fileID: 21300000, guid: 71fd04d7740350c4ba633d8a8027b7cc, type: 3}
+    - {fileID: 21300000, guid: 71fd04d7740350c4ba633d8a8027b7cc, type: 3}
+    - {fileID: 21300000, guid: 71fd04d7740350c4ba633d8a8027b7cc, type: 3}
+    - {fileID: 21300000, guid: 71fd04d7740350c4ba633d8a8027b7cc, type: 3}
+    - {fileID: 21300000, guid: 71fd04d7740350c4ba633d8a8027b7cc, type: 3}
+    delayTime: []
     triggers: []
   - name: RUN
     fps: 6
@@ -69,6 +74,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 065de97bed41a8f43955121122655531, type: 3}
     - {fileID: 21300000, guid: d92f9d0541264c245833ad5f55540242, type: 3}
     - {fileID: 21300000, guid: 9f5c2f374bb0f2b47a63e877255e5ee7, type: 3}
+    delayTime: []
     triggers: []
   - name: ATTACK1
     fps: 18
@@ -79,6 +85,12 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e0ab4fcc98092c741b04c733255acc38, type: 3}
     - {fileID: 21300000, guid: 8bd04d6005eefb243b7e7c4babc50227, type: 3}
     - {fileID: 21300000, guid: 94a84b3005767304aa79d24cf4d27ec2, type: 3}
+    delayTime:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0.2
     triggers: []
   - name: ATTACK2
     fps: 15
@@ -88,6 +100,11 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e94478d7819089445991770d48ddc0b8, type: 3}
     - {fileID: 21300000, guid: 396c754f02a95b94e9a8dd640628a682, type: 3}
     - {fileID: 21300000, guid: 00671cb35605ccf4e8a14477f20cb2eb, type: 3}
+    delayTime:
+    - 0
+    - 0
+    - 0
+    - 0.2
     triggers: []
   playAnimationOnStart: IDLE
 --- !u!114 &114540089219105674

@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour {
 
 			/* play run animation for all equipment character equipped */
 			for(int i = 0; i < equipmentAnim.Length; ++i)
-				equipmentAnim [i].Play ("RUN");
+				equipmentAnim [i].Play ("RUN", true, anim.currentFrame);
 		}
 		else
 		{
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour {
 
 			/* play idle animation for all equipment character equipped */
 			for(int i = 0; i < equipmentAnim.Length; ++i)
-				equipmentAnim [i].Play ("IDLE");
+				equipmentAnim [i].Play ("IDLE", true, anim.currentFrame);
 		}
 	}
 
@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour {
 
 			/* play first attack animation for all equipment character equipped */
 			for(int i = 0; i < equipmentAnim.Length; ++i)
-				equipmentAnim [i].Play ("ATTACK1", false);
+				equipmentAnim [i].Play ("ATTACK1", false, anim.currentFrame);
 		}
 		/* if second attack is on */
 		else if(isSecondAttackPlaying)
@@ -208,7 +208,7 @@ public class PlayerController : MonoBehaviour {
 
 			/* play first attack animation for all equipment character equipped */
 			for(int i = 0; i < equipmentAnim.Length; ++i)
-				equipmentAnim [i].Play ("ATTACK2", false);
+				equipmentAnim [i].Play ("ATTACK2", false, anim.currentFrame);
 		}
 	}
 
@@ -239,10 +239,22 @@ public class PlayerController : MonoBehaviour {
 			return false;
 	}
 
+
+
 	/* function to be called by Equipment::Use() */
 	void UpdateAnimReference()
 	{
 		equipmentAnim = transform.GetChild (0).GetComponentsInChildren<SpriteAnimator> ();
+
+		/* if body animation is playing (to make both body and equipment play simultaneously) */
+		if (anim.playing) 
+		{
+			anim.ForcePlay (anim.currentAnimation.name, false, anim.currentFrame);
+
+			/* play current playing animation for all equipment character equipped */
+			for (int i = 0; i < equipmentAnim.Length; ++i)
+				equipmentAnim [i].ForcePlay (anim.currentAnimation.name, false, anim.currentFrame);
+		}
 	}
 
 	/* function to be called by sprite animator trigger */

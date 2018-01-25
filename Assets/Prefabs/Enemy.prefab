@@ -287,6 +287,7 @@ MonoBehaviour:
     fps: 1
     frames:
     - {fileID: 21300000, guid: 71fd04d7740350c4ba633d8a8027b7cc, type: 3}
+    delayTime: []
     triggers: []
   - name: RUN
     fps: 6
@@ -297,6 +298,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 065de97bed41a8f43955121122655531, type: 3}
     - {fileID: 21300000, guid: d92f9d0541264c245833ad5f55540242, type: 3}
     - {fileID: 21300000, guid: 9f5c2f374bb0f2b47a63e877255e5ee7, type: 3}
+    delayTime: []
     triggers: []
   - name: ATTACK
     fps: 12
@@ -307,6 +309,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e0ab4fcc98092c741b04c733255acc38, type: 3}
     - {fileID: 21300000, guid: 8bd04d6005eefb243b7e7c4babc50227, type: 3}
     - {fileID: 21300000, guid: 94a84b3005767304aa79d24cf4d27ec2, type: 3}
+    delayTime: []
     triggers: []
   playAnimationOnStart: IDLE
 --- !u!114 &114182354033766446
@@ -330,6 +333,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ff2de7d7a956c7648bf135950089022d, type: 3}
     - {fileID: 21300000, guid: ac16860152aa499409f30cc3423318ea, type: 3}
     - {fileID: 21300000, guid: 24479d962901822428e9c0c40f1c6084, type: 3}
+    delayTime: []
     triggers: []
   - name: RUN
     fps: 6
@@ -340,6 +344,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 39ab047e280ab244dbd92697f0238ee4, type: 3}
     - {fileID: 21300000, guid: 8882c556eacc1384d9c9257ade0e0262, type: 3}
     - {fileID: 21300000, guid: 01ca917a2eb10144098accca7b03f3eb, type: 3}
+    delayTime: []
     triggers: []
   - name: ATTACK
     fps: 12
@@ -350,6 +355,12 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 5dace01aa5ec3af47b843fdf4cf0cc0f, type: 3}
     - {fileID: 21300000, guid: a1997deca42792c4d9f8619bc136038a, type: 3}
     - {fileID: 21300000, guid: db88a885678fd53499787f00b6660285, type: 3}
+    delayTime:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0.2
     triggers:
     - frame: 5
       name: Trigger_DisableAttack
@@ -394,6 +405,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 6be25b9f2a9ac9c47ba378ab16043fbc, type: 3}
     - {fileID: 21300000, guid: bde87b78091f649489dafd8488c9bfbf, type: 3}
     - {fileID: 21300000, guid: e0e8f993f35f1c04a93cb39352474b56, type: 3}
+    delayTime: []
     triggers: []
   - name: RUN
     fps: 6
@@ -404,6 +416,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 764eb91f73aea864ea840506c9cd738a, type: 3}
     - {fileID: 21300000, guid: a0f7e536e744019448e60e47badfb6f5, type: 3}
     - {fileID: 21300000, guid: 4f01915a243c27143bc9a98b69cf5607, type: 3}
+    delayTime: []
     triggers: []
   - name: ATTACK
     fps: 12
@@ -414,6 +427,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: a99c5e8038ad291478f6106029bd2f84, type: 3}
     - {fileID: 21300000, guid: 1957b02076610294b95a5ca68d0e8608, type: 3}
     - {fileID: 21300000, guid: e27f2bf087c6e9f499bcbe7d029dc365, type: 3}
+    delayTime: []
     triggers: []
   playAnimationOnStart: IDLE
 --- !u!114 &114842544019827444

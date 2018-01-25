@@ -18,7 +18,7 @@ public class SpriteAnimator : MonoBehaviour
 		public string name;
 		public int fps;
 		public Sprite[] frames;
-
+		[Range(0f, 5f)]	public float[] delayTime;
 		public AnimationTrigger[] triggers;
 	}
 
@@ -114,7 +114,7 @@ public class SpriteAnimator : MonoBehaviour
 	IEnumerator PlayAnimation(Animation animation)
 	{
 		float timer = 0f;
-		float delay = 1f / (float)animation.fps;
+		float delay;
 
 		/* loop while animation looping signal is on
 		   and current frame is not the end frame of the animation */
@@ -123,6 +123,18 @@ public class SpriteAnimator : MonoBehaviour
 		   After escaping from the NextFrame function, spriteRender would render the last frame and then possible to exit from the while-loop*/
 		while (loop || currentFrame < animation.frames.Length-1)
 		{
+			/* if the current frame has a delay time that user input */
+			if (currentFrame < animation.delayTime.Length) 
+			{
+				/* if the delay time of the current frame is 0 second, calculate the delay time according to fps */
+				if (animation.delayTime [currentFrame] == 0f)
+					delay = 1f / (float)animation.fps;
+				else /* otherwise calculate the delay time according to fps and delay time that user input */
+					delay = animation.delayTime[currentFrame] + 1f / (float)animation.fps;
+			}
+			else
+				delay = 1f / (float)animation.fps;
+
 			while (timer < delay)
 			{
 				timer += Time.deltaTime;

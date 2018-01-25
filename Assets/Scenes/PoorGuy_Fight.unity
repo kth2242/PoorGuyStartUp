@@ -17966,6 +17966,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ff2de7d7a956c7648bf135950089022d, type: 3}
     - {fileID: 21300000, guid: ac16860152aa499409f30cc3423318ea, type: 3}
     - {fileID: 21300000, guid: 24479d962901822428e9c0c40f1c6084, type: 3}
+    delayTime: []
     triggers: []
   - name: RUN
     fps: 6
@@ -17976,6 +17977,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 39ab047e280ab244dbd92697f0238ee4, type: 3}
     - {fileID: 21300000, guid: 8882c556eacc1384d9c9257ade0e0262, type: 3}
     - {fileID: 21300000, guid: 01ca917a2eb10144098accca7b03f3eb, type: 3}
+    delayTime: []
     triggers: []
   - name: ATTACK1
     fps: 18
@@ -17986,6 +17988,12 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 5dace01aa5ec3af47b843fdf4cf0cc0f, type: 3}
     - {fileID: 21300000, guid: a1997deca42792c4d9f8619bc136038a, type: 3}
     - {fileID: 21300000, guid: db88a885678fd53499787f00b6660285, type: 3}
+    delayTime:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0.2
     triggers:
     - frame: 5
       name: Trigger_DisableFirstAttack
@@ -17999,6 +18007,11 @@ MonoBehaviour:
     - {fileID: 21300000, guid: c4af30c708a0d424db18f0e15e074e37, type: 3}
     - {fileID: 21300000, guid: 95965725e4ca2ac49b1f2662d789adf5, type: 3}
     - {fileID: 21300000, guid: 99613bed0a0e0494a85b6df256022e0c, type: 3}
+    delayTime:
+    - 0
+    - 0
+    - 0
+    - 0.2
     triggers:
     - frame: 4
       name: Trigger_DisableSecondAttack
